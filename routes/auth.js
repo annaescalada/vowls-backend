@@ -28,7 +28,7 @@ router.post(
   async (req, res, next) => {
     const { username, password } = req.body;
     try {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ email: username });
       if (!user) {
         next(createError(404));
       } else if (bcrypt.compareSync(password, user.password)) {
@@ -49,7 +49,6 @@ router.post(
   validationLoggin(),
   async (req, res, next) => {
     const { username, password } = req.body;
-
     try {
       const user = await User.findOne({ username }, 'username');
       if (user) {
@@ -57,7 +56,7 @@ router.post(
       } else {
         const salt = bcrypt.genSaltSync(10);
         const hashPass = bcrypt.hashSync(password, salt);
-        const newUser = await User.create({ username, password: hashPass });
+        const newUser = await User.create({ email: username, password: hashPass, completed: false });
         req.session.currentUser = newUser;
         res.status(200).json(newUser);
       }
@@ -72,7 +71,7 @@ router.post('/logout', isLoggedIn(), (req, res, next) => {
   return res.status(204).send();
 });
 
-router.update(
+router.put(
   '/update',
   isLoggedIn(),
   validationUpdate(),
@@ -90,7 +89,7 @@ router.update(
     }
   });
 
-router.update(
+router.put(
   '/change-password',
   isLoggedIn(),
   validationPassword(),
