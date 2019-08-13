@@ -27,3 +27,23 @@ exports.validationLoggin = () => (req, res, next) => {
     next();
   }
 };
+
+exports.validationUpdate = () => (req, res, next) => {
+  const { name, birth, gender, weight, height, portion, IMC, GED } = req.body;
+
+  if (!name || !birth || !gender || !weight || !height || !portion || !IMC || !GED) {
+    next(createError(422));
+  } else {
+    next();
+  }
+};
+
+exports.validationPassword = () => (req, res, next) => {
+  const { password } = req.body;
+
+  if (!password) {
+    next(createError(422));
+  } else {
+    next();
+  }
+};

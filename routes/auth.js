@@ -5,13 +5,16 @@ const createError = require('http-errors');
 
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
-const User = require('../models/user');
+const User = require('../models/User');
 
 const {
   isLoggedIn,
   isNotLoggedIn,
-  validationLoggin
+  validationLoggin,
+  validationUpdate,
+  validationPassword
 } = require('../helpers/middlewares');
 
 router.get('/me', isLoggedIn(), (req, res, next) => {
@@ -69,10 +72,55 @@ router.post('/logout', isLoggedIn(), (req, res, next) => {
   return res.status(204).send();
 });
 
-router.get('/private', isLoggedIn(), (req, res, next) => {
-  res.status(200).json({
-    message: 'This is a private message'
+router.update(
+  '/update',
+  isLoggedIn(),
+  validationUpdate(),
+  async (req, res, next) => {
+    const { name, birth, gender, weight, height, portion, IMC, GED } = req.body;
+    const newInfo = { name, birth, gender, weight, height, portion, IMC, GED };
+    const { id } = req.session.currentUser;
+    try {
+      await User.findByIdAndUpdate(id, newInfo);
+      const newUser = await User.findById(id);
+      req.session.currentUser = newUser;
+      return res.status(200).json(newUser);
+    } catch (error) {
+      next(error);
+    }
   });
-});
+
+router.update(
+  '/change-password',
+  isLoggedIn(),
+  validationPassword(),
+  async (req, res, next) => {
+    const { password } = req.body;
+    const { id } = req.session.currentUser;
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+    try {
+      await User.findByIdAndUpdate(id, { password: hashedPassword });
+      const newUser = await User.findById(id);
+      req.session.currentUser = newUser;
+      return res.status(200).json(newUser);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+router.delete(
+  '/delete',
+  isLoggedIn(),
+  async (req, res, next) => {
+    const { id } = req.session.currentUser;
+    try {
+      await User.findByIdAndDelete(id);
+      req.session.destroy();
+      return res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  });
 
 module.exports = router;
