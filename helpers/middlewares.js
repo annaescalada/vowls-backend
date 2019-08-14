@@ -29,9 +29,9 @@ exports.validationLoggin = () => (req, res, next) => {
 };
 
 exports.validationUpdate = () => (req, res, next) => {
-  const { name, birth, gender, weight, height, portion, IMC, GED } = req.body;
+  const { name, age, gender, weight, height, activity, GED, IMC, portion } = req.body;
 
-  if (!name || !birth || !gender || !weight || !height || !portion || !IMC || !GED) {
+  if (!name || !age || !gender || !weight || !height || !activity || !portion || !IMC || !GED) {
     next(createError(422));
   } else {
     next();

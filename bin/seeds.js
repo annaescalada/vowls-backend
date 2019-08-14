@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 // setup mongoose
-mongoose.connect('mongodb://localhost/ruquDB', {
+mongoose.connect('mongodb://localhost/vowlsDB', {
   keepAlive: true,
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE
