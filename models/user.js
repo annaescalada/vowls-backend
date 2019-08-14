@@ -13,13 +13,14 @@ const userSchema = new Schema({
     required: true
   },
   name: String,
-  birth: Date,
+  age: Number,
   gender: {
     type: String,
     enum: ['male', 'female']
   },
   weight: Number,
   height: Number,
+  activity: Number,
   portion: Number,
   IMC: Number,
   GED: Number,

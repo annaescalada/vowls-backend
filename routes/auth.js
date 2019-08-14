@@ -95,13 +95,19 @@ router.put(
   validationPassword(),
   async (req, res, next) => {
     const { password } = req.body;
-    const { id } = req.session.currentUser;
+    const id = req.session.currentUser._id;
+
+    console.log(id);
+
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
+
     try {
       await User.findByIdAndUpdate(id, { password: hashedPassword });
+      
       const newUser = await User.findById(id);
       req.session.currentUser = newUser;
+      console.log(newUser);
       return res.status(200).json(newUser);
     } catch (error) {
       next(error);
@@ -112,7 +118,7 @@ router.delete(
   '/delete',
   isLoggedIn(),
   async (req, res, next) => {
-    const { id } = req.session.currentUser;
+    const id = req.session.currentUser._id;
     try {
       await User.findByIdAndDelete(id);
       req.session.destroy();
