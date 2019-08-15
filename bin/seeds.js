@@ -182,63 +182,65 @@ const seeds = [
     portion: 100,
     categories: ['main']
   },
-
-
-
-
   {
     name: 'Tomate',
-    img: '',
-    group: 'greens',
+    img: './ingredients/tomato.jpg',
+    group: 'othervegs',
     portion: 100,
     categories: ['main']
   },
   {
     name: 'Zanahoria',
-    img: '',
-    group: 'greens',
+    img: './ingredients/carrot.jpg',
+    group: 'othervegs',
     portion: 100,
     categories: ['main']
   },
   {
-    name: 'Champilñones',
-    img: '',
-    group: 'greens',
+    name: 'Champiñones',
+    img: './ingredients/champiñones.jpg',
+    group: 'othervegs',
     portion: 100,
     categories: ['main']
   },
   {
     name: 'Remolacha',
-    img: '',
-    group: 'greens',
+    img: './ingredients/beets.jpg',
+    group: 'othervegs',
     portion: 100,
     categories: ['main']
   },
   {
     name: 'Pimiento',
-    img: '',
-    group: 'greens',
+    img: './ingredients/pepper.jpg',
+    group: 'othervegs',
     portion: 100,
     categories: ['main']
   },
   {
-    name: 'Pimiento',
-    img: '',
-    group: 'greens',
+    name: 'Calabacín',
+    img: './ingredients/zuchini.jpg',
+    group: 'othervegs',
     portion: 100,
     categories: ['main']
   },
   {
-    name: 'Pimiento',
-    img: '',
-    group: 'greens',
+    name: 'Berenjena',
+    img: './ingredients/eggplanrt.jpg',
+    group: 'othervegs',
     portion: 100,
     categories: ['main']
   },
-  
-
+  {
+    name: 'Calabaza',
+    img: './ingredients/pumkin.jpg',
+    group: 'othervegs',
+    portion: 100,
+    categories: ['main']
+  }
 ];
 
+Ingredient.deleteMany({});
 Ingredient.create(seeds).then((ingredient) => {
   console.log(ingredient);
   mongoose.connection.close();
