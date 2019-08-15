@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start-dev": "nodemon ./bin/www"
+    "start-dev": "nodemon ./bin/www",
+    "food-seeds": "node ./bin/seeds.js"
   },
   "engines": {
     "node": "v12.6.0",

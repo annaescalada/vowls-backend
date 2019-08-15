@@ -7,8 +7,7 @@ const ingredientSchema = new Schema({
     required: true
   },
   img: {
-    type: String,
-    required: true
+    type: String
   },
   group: {
     type: String,
@@ -18,6 +17,14 @@ const ingredientSchema = new Schema({
   portion: {
     type: Number,
     required: true
+  },
+  categories: {
+    type: []
+  }
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   }
 });
 
