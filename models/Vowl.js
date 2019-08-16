@@ -5,37 +5,37 @@ const ObjectId = Schema.Types.ObjectId;
 const userSchema = new Schema({
   cereal: {
     type: ObjectId,
-    ref: 'Ingredient',
+    ref: 'Food',
     required: true
   },
   protein: {
     type: ObjectId,
-    ref: 'Ingredient',
+    ref: 'Food',
     required: true
   },
   tuber: {
     type: ObjectId,
-    ref: 'Ingredient',
+    ref: 'Food',
     required: true
   },
   cruciferous: {
     type: ObjectId,
-    ref: 'Ingredient',
+    ref: 'Food',
     required: true
   },
   greens: {
     type: ObjectId,
-    ref: 'Ingredient',
+    ref: 'Food',
     required: true
   },
   othervegs: {
     type: ObjectId,
-    ref: 'Ingredient',
+    ref: 'Food',
     required: true
   },
   salsa: {
     type: ObjectId,
-    ref: 'Ingredient',
+    ref: 'Food',
     required: true
   }
 }, {

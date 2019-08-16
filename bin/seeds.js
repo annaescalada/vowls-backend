@@ -10,7 +10,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   reconnectTries: Number.MAX_VALUE
 });
 
-const Ingredient = require('../models/Ingredient.js');
+const Food = require('../models/Food.js');
 
 const seeds = [
 
@@ -123,119 +123,119 @@ const seeds = [
     name: 'Brócoli',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948658/brocoli_gxbmdf.jpg',
     group: 'cruciferous',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Coliflor',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948659/cauliflower_vcuba2.jpg',
     group: 'cruciferous',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Col lombarda',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/red-cabbage_qscnwr.jpg',
     group: 'cruciferous',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Kale',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948660/kale_o6yv1y.jpg',
     group: 'cruciferous',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Rábano',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/radish_agpb4v.jpg',
     group: 'cruciferous',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Rúcula',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948659/aurugula_iognqy.jpg',
     group: 'cruciferous',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Espinacas',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/spinach_hypnfu.jpg',
     group: 'greens',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Lechuga',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948660/lettuce_dhhdop.jpg',
     group: 'greens',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Acelgas',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948659/chard_mpgqpc.jpg',
     group: 'greens',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Tomate',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/tomato_sqxw78.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Zanahoria',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948658/carrot_sftsu1.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Champiñones',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948659/champin%CC%83ones_vyehlq.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Remolacha',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948659/beets_yvebsa.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Pimiento',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/pepper_yyinoi.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Calabaza',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/pumkin_nuxtvt.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Berenjena',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948659/eggplanrt_dli6my.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
   {
     name: 'Calabacín',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948662/zuchini_pkyyi0.jpg',
     group: 'othervegs',
-    portion: 100,
+    portion: 0,
     categories: ['main']
   },
 
@@ -325,24 +325,40 @@ const seeds = [
   },
   {
     name: 'Bebida vegetal',
-    img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/tzatziki_sshzjd.jpg',
+    img: '',
     group: 'dairy',
     portion: 125,
     categories: ['breakfast']
   },
   {
     name: 'Yogur vegetal',
-    img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/tzatziki_sshzjd.jpg',
+    img: '',
     group: 'dairy',
     portion: 125,
+    categories: ['breakfast']
+  },
+  {
+    name: 'Manzana, plátano, pera, naranja, mandarina, uva, sandía, melón...',
+    img: '',
+    group: 'fruit',
+    portion: 200,
+    categories: ['breakfast']
+  },
+  {
+    name: 'Frambuesas, moras, arándanos, fresas, cerezas...',
+    img: '',
+    group: 'berries',
+    portion: 100,
     categories: ['breakfast']
   }
 ];
 
-Ingredient.deleteMany({});
-Ingredient.create(seeds).then((ingredient) => {
-  console.log(ingredient);
-  mongoose.connection.close();
-}).catch((error) => {
-  console.log(error);
-});
+Food.deleteMany({})
+  .then(() => {
+    Food.create(seeds).then((food) => {
+      console.log(food);
+      mongoose.connection.close();
+    }).catch((error) => {
+      console.log(error);
+    });
+  });

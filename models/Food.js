@@ -28,6 +28,6 @@ const foodSchema = new Schema({
   }
 });
 
-const Ingredient = mongoose.model('Ingredient', foodSchema);
+const Food = mongoose.model('Food', foodSchema);
 
-module.exports = Ingredient;
+module.exports = Food;
