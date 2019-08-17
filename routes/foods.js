@@ -10,14 +10,17 @@ const {
   isLoggedIn
 } = require('../helpers/middlewares');
 
-router.get('/all', isLoggedIn(), async (req, res, next) => {
-  try {
-    const foods = await Food.find();
-    console.log('From service', foods);
-    res.json({ foods });
-  } catch (error) {
-    next(error);
-  }
-});
+router.get(
+  '/all',
+  isLoggedIn(),
+  async (req, res, next) => {
+    try {
+      const foods = await Food.find();
+      console.log('From service', foods);
+      res.json({ foods });
+    } catch (error) {
+      next(error);
+    }
+  });
 
 module.exports = router;

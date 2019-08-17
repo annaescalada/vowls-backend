@@ -47,3 +47,13 @@ exports.validationPassword = () => (req, res, next) => {
     next();
   }
 };
+
+exports.validationVowlSave = () => (req, res, next) => {
+  const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa, user } = req.body;
+
+  if (!cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa || !user) {
+    next(createError(422));
+  } else {
+    next();
+  }
+};

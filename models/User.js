@@ -24,7 +24,7 @@ const userSchema = new Schema({
   portion: Number,
   IMC: Number,
   GED: Number,
-  Vowls: [{
+  vowls: [{
     type: ObjectId,
     ref: 'Vowl'
   }],

@@ -45,6 +45,6 @@ const userSchema = new Schema({
   }
 });
 
-const User = mongoose.model('User', userSchema);
+const Vowl = mongoose.model('Vowl', userSchema);
 
-module.exports = User;
+module.exports = Vowl;

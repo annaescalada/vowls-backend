@@ -257,7 +257,7 @@ const seeds = [
     name: 'Frutos secos',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948660/nuts_ju05wh.jpg',
     group: 'fat',
-    portion: 15,
+    portion: 10,
     categories: ['main', 'breakfast']
   },
   {
@@ -271,14 +271,14 @@ const seeds = [
     name: 'Tahini',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565948661/tahini_b7t0hw.jpg',
     group: 'fat',
-    portion: 15,
+    portion: 10,
     categories: ['main', 'breakfast']
   },
   {
     name: 'Aceite de oliva virgen extra',
     img: 'https://res.cloudinary.com/greenstinct/image/upload/v1565949621/oil_ymrdwo.jpg',
     group: 'fat',
-    portion: 15,
+    portion: 10,
     categories: ['main']
   },
   {
