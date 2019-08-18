@@ -12,6 +12,22 @@ const {
   validationVowlSave
 } = require('../helpers/middlewares');
 
+router.get(
+  '/getOne/:id',
+  isLoggedIn(),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const vowl = await Vowl.findById(id);
+      // .populate({        'cereal', 'protein', 'tuber', 'cruciferous', 'greens', 'othervegs', 'salsa' });
+
+      res.json({ vowl });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 router.post(
   '/save',
   isLoggedIn(),
@@ -39,7 +55,6 @@ router.delete(
   isLoggedIn(),
   async (req, res, next) => {
     const { id } = req.params;
-    console.log(id);
     await Vowl.findByIdAndDelete(id);
 
     const userID = req.session.currentUser._id;
@@ -57,20 +72,3 @@ router.delete(
 );
 
 module.exports = router;
-
-// router.post('/matches/:matchID/delete', isNotLoggedIn, isMatchIdValid, async (req, res, next) => {
-//   try {
-//     const { matchID } = req.params;
-//     if (!ObjectId.isValid(matchID)) {
-//       next();
-//     }
-//     const match = await Match.findById(matchID);
-//     if (!match) {
-//       next();
-//     }
-//     await Match.findByIdAndDelete(matchID);
-//     res.json({ message: 'Match deleted' });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
