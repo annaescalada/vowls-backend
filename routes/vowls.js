@@ -28,9 +28,7 @@ router.post(
 
       req.session.currentUser = updatedUser;
 
-      console.log(updatedUser);
-
-      res.json({ newVowl });
+      res.json({ updatedUser });
     } catch (error) {
       next(error);
     }
@@ -40,6 +38,16 @@ router.delete(
   '/delete/:id',
   isLoggedIn(),
   async (req, res, next) => {
+    const { id } = req.params;
+    console.log(id);
+    await Vowl.findByIdAndDelete(id);
+
+    const userID = req.session.currentUser._id;
+    const updatedUser = await User.findById(userID).populate('vowls');
+
+    req.session.currentUser = updatedUser;
+
+    res.json({ updatedUser });
     try {
 
     } catch (error) {

@@ -17,7 +17,14 @@ const {
   validationPassword
 } = require('../helpers/middlewares');
 
-router.get('/me', isLoggedIn(), (req, res, next) => {
+router.get('/me', isLoggedIn(), async (req, res, next) => {
+  const userID = req.session.currentUser._id;
+  try {
+    const updatedUser = await User.findById(userID).populate('vowls');
+    req.session.currentUser = updatedUser;
+  } catch (error) {
+    next(error);
+  }
   res.json(req.session.currentUser);
 });
 
