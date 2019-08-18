@@ -12,36 +12,41 @@ const {
   validationVowlSave
 } = require('../helpers/middlewares');
 
-router.get(
-  '/all',
-  isLoggedIn(),
-  async (req, res, next) => {
-    try {
-      const userID = req.session.currentUser._id;
-      const currentUser = await User.findById(userID).populate('vowls');
-      const vowls = currentUser.vowls;
-      console.log('From service all', vowls);
-      res.json({ vowls });
-    } catch (error) {
-      next(error);
-    }
-  });
-
-router.put(
+router.post(
   '/save',
   isLoggedIn(),
   validationVowlSave(),
   async (req, res, next) => {
     try {
+      const { name, description, cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
+      const newVowl = await Vowl.create({ name, description, cereal, protein, tuber, cruciferous, greens, othervegs, salsa });
+
       const userID = req.session.currentUser._id;
-      const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
-      const vowls = await Vowl.create({ cereal, protein, tuber, cruciferous, greens, othervegs, salsa, user: userID });
-      console.log('From service save', vowls);
-      res.json({ vowls });
+      const currentUserVowls = req.session.currentUser.vowls;
+      await User.findByIdAndUpdate(userID, { vowls: [...currentUserVowls, newVowl] });
+      const updatedUser = await User.findById(userID).populate('vowls');
+
+      req.session.currentUser = updatedUser;
+
+      console.log(updatedUser);
+
+      res.json({ newVowl });
     } catch (error) {
       next(error);
     }
   });
+
+router.delete(
+  '/delete/:id',
+  isLoggedIn(),
+  async (req, res, next) => {
+    try {
+
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;
 

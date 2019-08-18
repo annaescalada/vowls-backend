@@ -49,9 +49,9 @@ exports.validationPassword = () => (req, res, next) => {
 };
 
 exports.validationVowlSave = () => (req, res, next) => {
-  const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa, user } = req.body;
+  const { name, description, cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
 
-  if (!cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa || !user) {
+  if (!name || !description || !cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
     next(createError(422));
   } else {
     next();

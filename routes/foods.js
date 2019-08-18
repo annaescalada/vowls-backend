@@ -16,7 +16,6 @@ router.get(
   async (req, res, next) => {
     try {
       const foods = await Food.find();
-      console.log('From service', foods);
       res.json({ foods });
     } catch (error) {
       next(error);
