@@ -32,7 +32,7 @@ exports.validationUpdate = () => (req, res, next) => {
   const { name, age, gender, weight, height, activity, GED, IMC, portion } = req.body;
 
   if (!name || !age || !gender || !weight || !height || !activity || !portion || !IMC || !GED) {
-    next(createError(422));
+    next(createError(423));
   } else {
     next();
   }
@@ -42,7 +42,7 @@ exports.validationPassword = () => (req, res, next) => {
   const { password } = req.body;
 
   if (!password) {
-    next(createError(422));
+    next(createError(424));
   } else {
     next();
   }
@@ -52,7 +52,7 @@ exports.validationVowlSave = () => (req, res, next) => {
   const { name, description, cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
 
   if (!name || !description || !cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
-    next(createError(422));
+    next(createError(425));
   } else {
     next();
   }
