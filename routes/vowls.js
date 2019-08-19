@@ -18,8 +18,8 @@ router.get(
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const vowl = await Vowl.findById(id);
-      // .populate({        'cereal', 'protein', 'tuber', 'cruciferous', 'greens', 'othervegs', 'salsa' });
+      const vowl = await Vowl.findById(id)
+        .populate('cereal protein tuber cruciferous greens othervegs salsa');
 
       res.json({ vowl });
     } catch (error) {
