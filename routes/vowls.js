@@ -9,7 +9,8 @@ const User = require('../models/User');
 
 const {
   isLoggedIn,
-  validationVowlSave
+  validationVowlSave,
+  validationLastSavedVowl
 } = require('../helpers/middlewares');
 
 router.get(
@@ -53,6 +54,7 @@ router.post(
 router.put(
   '/last-vowl',
   isLoggedIn(),
+  validationLastSavedVowl,
   async (req, res, next) => {
     try {
       const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;

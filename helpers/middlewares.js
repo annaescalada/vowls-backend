@@ -57,3 +57,12 @@ exports.validationVowlSave = () => (req, res, next) => {
     next();
   }
 };
+
+exports.validationLastSavedVowl = () => (req, res, next) => {
+  const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
+  if (!cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
+    next(createError(426));
+  } else {
+    next();
+  }
+};

@@ -14,6 +14,7 @@ require('dotenv').config();
 const auth = require('./routes/auth');
 const foods = require('./routes/foods');
 const vowls = require('./routes/vowls');
+const meals = require('./routes/meals');
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -61,6 +62,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth', auth);
 app.use('/foods', foods);
 app.use('/vowls', vowls);
+app.use('/meals', meals);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
