@@ -54,11 +54,11 @@ router.post(
 router.put(
   '/last-vowl',
   isLoggedIn(),
-  validationLastSavedVowl,
+  validationLastSavedVowl(),
   async (req, res, next) => {
     try {
       const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
-
+      console.log('aquí');
       const userID = req.session.currentUser._id;
       await User.findByIdAndUpdate(userID, { lastGeneratedVowl: { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } });
       const updatedUser = await User.findById(userID).populate('vowls');
