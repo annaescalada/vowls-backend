@@ -7,6 +7,9 @@ const router = express.Router();
 const Vowl = require('../models/Vowl');
 const User = require('../models/User');
 
+var mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
+
 const {
   isLoggedIn,
   validationVowlSave,
@@ -19,6 +22,9 @@ router.get(
   async (req, res, next) => {
     try {
       const { id } = req.params;
+      if (!ObjectId.isValid(id)) {
+        next();
+      }
       const vowl = await Vowl.findById(id)
         .populate('cereal protein tuber cruciferous greens othervegs salsa');
 
@@ -58,7 +64,6 @@ router.put(
   async (req, res, next) => {
     try {
       const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
-      console.log('aquí');
       const userID = req.session.currentUser._id;
       await User.findByIdAndUpdate(userID, { lastGeneratedVowl: { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } });
       const updatedUser = await User.findById(userID).populate('vowls');
@@ -76,6 +81,9 @@ router.delete(
   isLoggedIn(),
   async (req, res, next) => {
     const { id } = req.params;
+    if (!ObjectId.isValid(id)) {
+      next();
+    }
     await Vowl.findByIdAndDelete(id);
 
     const userID = req.session.currentUser._id;

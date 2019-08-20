@@ -87,7 +87,6 @@ router.put(
     const { name, age, gender, weight, height, activity, GED, IMC, portion } = req.body;
     const newInfo = { name, age, gender, weight, height, activity, GED, IMC, portion, completed: true };
     const id = req.session.currentUser._id;
-    console.log(id);
     try {
       await User.findByIdAndUpdate(id, newInfo);
       const newUser = await User.findById(id);
@@ -106,8 +105,6 @@ router.put(
     const { password } = req.body;
     const id = req.session.currentUser._id;
 
-    console.log(id);
-
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(password, salt);
 
@@ -116,7 +113,6 @@ router.put(
 
       const newUser = await User.findById(id);
       req.session.currentUser = newUser;
-      console.log(newUser);
       return res.status(200).json(newUser);
     } catch (error) {
       next(error);
