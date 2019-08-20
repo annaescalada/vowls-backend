@@ -28,6 +28,10 @@ const userSchema = new Schema({
     type: ObjectId,
     ref: 'Vowl'
   }],
+  lastGeneratedVowl: Object,
+  meals: [{
+    type: Object
+  }],
   completed: Boolean
 }, {
   timestamps: {

@@ -50,6 +50,25 @@ router.post(
     }
   });
 
+router.put(
+  '/last-vowl',
+  isLoggedIn(),
+  async (req, res, next) => {
+    try {
+      const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
+
+      const userID = req.session.currentUser._id;
+      await User.findByIdAndUpdate(userID, { lastGeneratedVowl: { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } });
+      const updatedUser = await User.findById(userID).populate('vowls');
+
+      req.session.currentUser = updatedUser;
+
+      res.json({ updatedUser });
+    } catch (error) {
+      next(error);
+    }
+  });
+
 router.delete(
   '/delete/:id',
   isLoggedIn(),
