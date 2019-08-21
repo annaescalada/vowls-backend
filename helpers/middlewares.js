@@ -21,7 +21,9 @@ exports.isNotLoggedIn = () => (req, res, next) => {
 exports.validationLoggin = () => (req, res, next) => {
   const { username, password } = req.body;
 
-  if (!username || !password) {
+  if (!username) {
+    next(createError(421));
+  } else if (!password) {
     next(createError(422));
   } else {
     next();
@@ -31,8 +33,24 @@ exports.validationLoggin = () => (req, res, next) => {
 exports.validationUpdate = () => (req, res, next) => {
   const { name, age, gender, weight, height, activity, GED, IMC, portion } = req.body;
 
-  if (!name || !age || !gender || !weight || !height || !activity || !portion || !IMC || !GED) {
+  if (!name) {
     next(createError(423));
+  } else if (!age) {
+    next(createError(424));
+  } else if (!gender) {
+    next(createError(425));
+  } else if (!weight) {
+    next(createError(426));
+  } else if (!height) {
+    next(createError(427));
+  } else if (!activity) {
+    next(createError(428));
+  } else if (!portion) {
+    next(createError(429));
+  } else if (!IMC) {
+    next(createError(430));
+  } else if (!GED) {
+    next(createError(431));
   } else {
     next();
   }
@@ -42,7 +60,7 @@ exports.validationPassword = () => (req, res, next) => {
   const { password } = req.body;
 
   if (!password) {
-    next(createError(424));
+    next(createError(432));
   } else {
     next();
   }
@@ -52,7 +70,7 @@ exports.validationVowlSave = () => (req, res, next) => {
   const { name, description, cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
 
   if (!name || !description || !cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
-    next(createError(425));
+    next(createError(433));
   } else {
     next();
   }
@@ -61,7 +79,7 @@ exports.validationVowlSave = () => (req, res, next) => {
 exports.validationLastSavedVowl = () => (req, res, next) => {
   const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
   if (!cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
-    next(createError(426));
+    next(createError(434));
   } else {
     next();
   }
