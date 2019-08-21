@@ -27,7 +27,6 @@ router.get(
       }
       const vowl = await Vowl.findById(id)
         .populate('cereal protein tuber cruciferous greens othervegs salsa');
-
       res.json({ vowl });
     } catch (error) {
       next(error);
@@ -47,6 +46,7 @@ router.post(
       const userID = req.session.currentUser._id;
       await User.findByIdAndUpdate(userID, { $push: { vowls: newVowl } });
       const updatedUser = await User.findById(userID).populate('vowls');
+      console.log(updatedUser);
 
       req.session.currentUser = updatedUser;
 
