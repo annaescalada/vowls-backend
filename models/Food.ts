@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema, model } from 'mongoose';
+import { IFood } from '../types';
 
 const foodSchema = new Schema({
   name: {
@@ -28,6 +28,6 @@ const foodSchema = new Schema({
   }
 });
 
-const Food = mongoose.model('Food', foodSchema);
+const Food = model<IFood>('Food', foodSchema);
 
-module.exports = Food;
+export default Food;

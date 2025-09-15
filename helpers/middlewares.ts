@@ -1,8 +1,7 @@
-'use strict';
+import createError from 'http-errors';
+import { Request, Response, NextFunction } from 'express';
 
-const createError = require('http-errors');
-
-exports.isLoggedIn = () => (req, res, next) => {
+export const isLoggedIn = () => (req: any, res: Response, next: NextFunction) => {
   if (req.session.currentUser) {
     next();
   } else {
@@ -10,7 +9,7 @@ exports.isLoggedIn = () => (req, res, next) => {
   }
 };
 
-exports.isNotLoggedIn = () => (req, res, next) => {
+export const isNotLoggedIn = () => (req: any, res: Response, next: NextFunction) => {
   if (!req.session.currentUser) {
     next();
   } else {
@@ -18,9 +17,8 @@ exports.isNotLoggedIn = () => (req, res, next) => {
   }
 };
 
-exports.validationLoggin = () => (req, res, next) => {
+export const validationLoggin = () => (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
-
   if (!username) {
     next(createError(421));
   } else if (!password) {
@@ -30,9 +28,8 @@ exports.validationLoggin = () => (req, res, next) => {
   }
 };
 
-exports.validationUpdate = () => (req, res, next) => {
+export const validationUpdate = () => (req: Request, res: Response, next: NextFunction) => {
   const { name, age, gender, weight, height, activity, GED, IMC, portion } = req.body;
-
   if (!name) {
     next(createError(423));
   } else if (!age) {
@@ -56,30 +53,10 @@ exports.validationUpdate = () => (req, res, next) => {
   }
 };
 
-exports.validationPassword = () => (req, res, next) => {
+export const validationPassword = () => (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
-
   if (!password) {
     next(createError(432));
-  } else {
-    next();
-  }
-};
-
-exports.validationVowlSave = () => (req, res, next) => {
-  const { name, description, cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
-
-  if (!name || !description || !cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
-    next(createError(433));
-  } else {
-    next();
-  }
-};
-
-exports.validationLastSavedVowl = () => (req, res, next) => {
-  const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
-  if (!cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
-    next(createError(434));
   } else {
     next();
   }

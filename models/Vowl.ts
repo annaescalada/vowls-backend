@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema, model } from 'mongoose';
+import { IVowl } from '../types';
+
 const ObjectId = Schema.Types.ObjectId;
 
-const userSchema = new Schema({
+const vowlSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -53,6 +54,6 @@ const userSchema = new Schema({
   }
 });
 
-const Vowl = mongoose.model('Vowl', userSchema);
+const Vowl = model<IVowl>('Vowl', vowlSchema);
 
-module.exports = Vowl;
+export default Vowl;
