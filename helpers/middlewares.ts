@@ -61,3 +61,22 @@ export const validationPassword = () => (req: Request, res: Response, next: Next
     next();
   }
 };
+
+export const validationVowlSave = () => (req: Request, res: Response, next: NextFunction) => {
+  const { name, description, cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
+
+  if (!name || !description || !cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
+    next(createError(433));
+  } else {
+    next();
+  }
+};
+
+export const validationLastSavedVowl = () => (req: Request, res: Response, next: NextFunction) => {
+  const { cereal, protein, tuber, cruciferous, greens, othervegs, salsa } = req.body;
+  if (!cereal || !protein || !tuber || !cruciferous || !greens || !othervegs || !salsa) {
+    next(createError(434));
+  } else {
+    next();
+  }
+};

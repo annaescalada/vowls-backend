@@ -4,13 +4,7 @@ import Food from '../models/Food';
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI as string, {
-  // @ts-ignore
-  keepAlive: true,
-  useNewUrlParser: true,
-  // @ts-ignore
-  reconnectTries: Number.MAX_VALUE
-});
+mongoose.connect(process.env.MONGODB_URI as string);
 
 const seeds = [
 
