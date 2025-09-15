@@ -16,17 +16,13 @@ import foods from './routes/foods';
 import vowls from './routes/vowls';
 import meals from './routes/meals';
 
-mongoose.connect(process.env.MONGODB_URI as string, {
-  // @ts-ignore
-  keepAlive: true,
-  useNewUrlParser: true,
-  // @ts-ignore
-  reconnectTries: Number.MAX_VALUE
-}).then(() => {
-  console.log('Connected to database');
-}).catch(error => {
-  console.error(error);
-});
+mongoose.connect(process.env.MONGODB_URI as string)
+  .then(() => {
+    console.log('Connected to database');
+  })
+  .catch(error => {
+    console.error(error);
+  });
 
 const app = express();
 

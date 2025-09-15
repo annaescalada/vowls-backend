@@ -10,7 +10,7 @@
       "request": "launch",
       "name": "nodemon",
       "runtimeExecutable": "nodemon",
-      "program": "${workspaceFolder}/bin/www",
+  "program": "${workspaceFolder}/app.ts",
       "restart": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"

@@ -1,11 +1,8 @@
 import { Router } from 'express';
 import Vowl from '../models/Vowl';
-import User from '../models/User';
 import mongoose from 'mongoose';
 import {
   isLoggedIn,
-  validationVowlSave,
-  validationLastSavedVowl
 } from '../helpers/middlewares';
 
 const router = Router();

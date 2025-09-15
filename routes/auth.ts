@@ -1,13 +1,11 @@
 import { Router } from 'express';
 import createError from 'http-errors';
-import bcrypt from 'bcrypt';
 import User from '../models/User';
+import bcrypt from 'bcrypt';
 import {
   isLoggedIn,
   isNotLoggedIn,
   validationLoggin,
-  validationUpdate,
-  validationPassword
 } from '../helpers/middlewares';
 
 const router = Router();
@@ -29,14 +27,12 @@ router.post('/login', isNotLoggedIn(), validationLoggin(), async (req: any, res,
   try {
     const user = await User.findOne({ email: username });
     if (!user) {
-      return next(createError(404));
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch) {
+      next(createError(404));
+    } else if (bcrypt.compareSync(password, user.password)) {
       req.session.currentUser = user;
       return res.status(200).json(user);
     } else {
-      return next(createError(401));
+      next(createError(401));
     }
   } catch (error) {
     next(error);
